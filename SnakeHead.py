@@ -1,3 +1,5 @@
+#SnakeHead.py
+
 import random
 
 import pygame
@@ -51,7 +53,8 @@ class SnakeHead:
             self.xVel = 0
             self.yVel = possible[random.randint(0, 1)]
 
-    def update(self,gridCount, gridWidth, windowSize, screen):
+    #returns state of snake after update
+    def update(self,gridCount, gridWidth, screen_width, screen_height):
         if(self.alive):
 
             prevX = self.x
@@ -59,7 +62,7 @@ class SnakeHead:
 
 
             #AI should make decisions here
-            # initialize vels: cant either move vertically or horizontally at once
+            # initialize vels: can either move vertically or horizontally at once
             possible = [1, -1]  # vels can be one or neg 1
             if random.random() > 0.5:
                 self.xVel = possible[random.randint(0, 1)]
@@ -76,12 +79,12 @@ class SnakeHead:
                 self.score += 1
                 self.food = Food(self, gridCount , gridWidth) #new rand food
                 #add new link
-                self.addLink(screen)
+                self.addLink(screen_width, screen_height)
 
-            if self.x >=windowSize or self.x < 0 or self.y >=windowSize or self.y < 0:
+            if self.x >=screen_width or self.x < 0 or self.y >=screen_height or self.y < 0:
                 self.alive = False
                 print(f"Snake {self.id} died with score {self.score} ")
-                return self.alive #snake died
+                return self.getState() #snake died
 
 
             #set link to prev pos
@@ -100,21 +103,12 @@ class SnakeHead:
                 if self.x == currLink.x and self.y == currLink.y:
                     self.alive = False
                     print(f"Snake {self.id} died with score {self.score} ")
-                    return self.alive # kill snake if it overlaps with body part
+                    return self.getState()  #
+                    # kill snake if it overlaps with body part
                 currLink = currLink.link
 
-        return self.alive
+        return self.getState()
 
-    def draw(self, screen , gridWidth, gridHeight ):
-        if(self.alive):
-            pygame.draw.rect(screen, (0,255,0), (self.x, self.y, gridWidth, gridHeight))
-            pygame.draw.rect(screen, (255, 0,0), (self.food.x, self.food.y, gridWidth, gridHeight))
-
-            currLink = self.link
-            # MAY HAVE TO OPTIMIZE THIS MOVING MECHANISM BUT FOR RN ITS FINE
-            while currLink is not None:
-                pygame.draw.rect(screen, "brown", (currLink.x, currLink.y, gridWidth, gridHeight))
-                currLink = currLink.link
 
     def setVel ( self , vels):
         #ensure orthogonality
@@ -122,9 +116,28 @@ class SnakeHead:
             self.xVel = vels[0]
             self.yVel = vels[1]
 
-    def addLink(self, screen ):
+    def addLink(self, screen_width, screen_height ):
         currLink = self
         while currLink.link is not None:
             currLink = currLink.link
-        currLink.link = Link(screen.get_width(),screen.get_height()) # spawn off screen so that it doesn't possibly collide
+        currLink.link = Link(screen_width,screen_height) # spawn off screen so that it doesn't possibly collide
 
+    #returns state of the snake for processing
+    def getState(self):
+        return {
+            "head": (self.x, self.y),
+            "body": self.getBodyParts(),
+            "food": (self.food.x, self.food.y),
+            "score": self.score,
+            "alive": self.alive,
+            "id": self.id
+        }
+
+    #returns list of tuples representing body parts of snake (not including head )
+    def getBodyParts(self):
+        part_list = []
+        next_link = self.link
+        while next_link is not None:
+            part_list.append((next_link.x, next_link.y) )
+            next_link = next_link.link
+        return part_list

@@ -1,8 +1,9 @@
-import pygame
-import random
-import threading
-from SnakeHead import SnakeHead
+#main.py
 
+import pygame
+from SnakeHead import SnakeHead
+from multiprocessing import Process, Queue
+from helper_functions import handle_quadrant
 '''
 snake game:
 each frame (lock framerate) ,
@@ -21,86 +22,125 @@ iteratively change head/link position based on prev position of parent link
 FOR MULTIPLE SNAKE AGENTS SHOULD DIVIDE POPULATION INTO QUADRANTS THEN OPEN UP MULTIPLE THREADS TO PROCESS THAT SNAKES IN THEIR QUADRANT  
 '''
 
-# pygame setup
-pygame.init()
+if __name__ == '__main__':
+    # pygame setup
+    pygame.init()
 
-windowSize = 840
-FPS = 60
-gridCount = 32
+    width = 840
+    height = width
+    FPS = 60
+    gridCount = 32
 
-grWidth = windowSize/ gridCount
-grHeight = windowSize/ gridCount
-moveDelay = 150  #ms
-lastTime = pygame.time.get_ticks()
-screen = pygame.display.set_mode((windowSize,windowSize))
-clock = pygame.time.Clock()
-running = True
+    grWidth = width / gridCount
+    grHeight = width / gridCount
+    moveDelay = 150  #ms
+    lastTime = pygame.time.get_ticks()
+    screen = pygame.display.set_mode((width, width))
+    clock = pygame.time.Clock()
+    running = True
+    clock = pygame.time.Clock()
+    font = pygame.font.Font(None, 30)
 
+    snakes= []
+    popSize = 2
+    for i in range(popSize):
+        snakes.append(SnakeHead(width / 2, width / 2, gridCount, grWidth, i))
 
-clock = pygame.time.Clock()
-font = pygame.font.Font(None, 30)
+    #PROCESS STUFF
+    #Split population based on process count and each process will handle their quadrants
+    process_count = 2
 
-snakes= []
-popSize = 4
-for i in range(popSize):
-    snakes.append(SnakeHead(windowSize/2,windowSize/2, gridCount, grWidth, i))
-
-
-
-
-
-#draw a bunch of lines instead of drawing a bunch of squares
-#where the lines intersect are possible coordinates
-# def drawGrid(screen, gridCount, grWidth, grHeight):
-#     #grWidth= width/ gridcount
-#     #for gc -1: line @ grWidth*i
-#     for i in range(1, gridCount):
-#         pygame.draw.line(screen, "gray", (grWidth*i , 0 ), (grWidth*i , screen.get_width()), 1)
-#         pygame.draw.line(screen, "gray", (0 , grHeight*i ), (screen.get_width() , grHeight*i), 1)
+    #ENSURE THE PROCESS COUNT CAN SPLIT POPULATION UP EVENLY
+    if popSize % process_count != 0:
+        print("Error: Population size must be divisible by process count")
+        exit(-1)
 
 
-while running:
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+
+    #draw a bunch of lines instead of drawing a bunch of squares
+    #where the lines intersect are possible coordinates
+    def drawGrid(screen, gridCount, grWidth, grHeight):
+        #grWidth= width/ gridcount
+        #for gc -1: line @ grWidth*i
+        for i in range(1, gridCount):
+            pygame.draw.line(screen, "gray", (grWidth*i , 0 ), (grWidth*i , screen.get_width()), 1)
+            pygame.draw.line(screen, "gray", (0 , grHeight*i ), (screen.get_width() , grHeight*i), 1)
+
+
+    #test_snake = SnakeHead(width / 2, width / 2, gridCount, grWidth, i)
+    results = []
+    while running:
+        # pygame.QUIT event means the user clicked X to close your window
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
 
-    #FPS
-    fps = clock.get_fps()
+        #FPS
+        fps = clock.get_fps()
 
-    #UPDATE
-    currentTime = pygame.time.get_ticks()
-    if currentTime - lastTime > moveDelay:
-        popAlive = False
-        #move snake
-        for i in range(0, len(snakes) ) :
-            snake_alive = snakes[i].update(gridCount, grWidth , windowSize, screen)
-            if snake_alive :
-                popAlive = True
+        #UPDATE
+        currentTime = pygame.time.get_ticks()
 
-        if not popAlive:
-            running =  False
+        if currentTime - lastTime > moveDelay:
+            popAlive = False
+            #state = test_snake.update(gridCount, grWidth, width , height)
+            state_queue = Queue()
+            #split population into groups then process that group
+            num_per_group = popSize//process_count
+            processes = []
+            for i in range(len(snakes)):
+                group = snakes[i*num_per_group:(i+1)*num_per_group]
+                processes.append(Process(target=handle_quadrant, args=(group, state_queue, gridCount,grWidth, width, height)))
 
-        lastTime = currentTime
+            #start processes
+            for p in processes:
+                p.start()
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("black")
+            #wait for all to finish
+            for p in processes:
+                p.join()
 
-    # RENDER  GAME HERE
+            #get results from queue
 
+            results = [state_queue.get() for p in processes]
 
-    for i in range(0, len(snakes)):
-        snakes[i].draw(screen, grWidth, grHeight)
+            #now check if whole population is dead or not
+            for object in results:
+                if object['alive'] :
+                    popAlive = True
+                    break
+            # if state['alive']:
+            #     popAlive = True
+            # results=[state]
+            if not popAlive:
+                running =  False
 
-    fps_text = font.render(f"FPS: {int(fps)}", True, pygame.Color('white'))
-    screen.blit(fps_text, (10, 10))
+            lastTime = currentTime
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+        # fill the screen with a color to wipe away anything from last frame
+        screen.fill("black")
 
-    clock.tick(FPS)  # limits FPS to 60
+        # RENDER  GAME HERE
 
-pygame.quit()
+        for object in results:
+            if object['alive']:
+                pygame.draw.rect(screen, (0, 255, 0), (object['head'][0], object['head'][1],grWidth, grWidth))
+                pygame.draw.rect(screen, (255, 0, 0), (object['food'][0], object['food'][1],grWidth, grWidth))
+
+                #for each of the body parts
+                for part in object['body']:
+                    pygame.draw.rect(screen, 'brown', (part[0], part[1], grWidth, grWidth))
+
+        drawGrid(screen, gridCount, grWidth, grHeight)
+        fps_text = font.render(f"FPS: {int(fps)}", True, pygame.Color('white'))
+        screen.blit(fps_text, (10, 10))
+
+        # flip() the display to put your work on screen
+        pygame.display.update()
+
+        clock.tick(FPS)  # limits FPS to 60
+
+    pygame.quit()
