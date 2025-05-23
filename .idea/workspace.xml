@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59b03b88-0ed8-4f19-a929-7f40fd4030f1" name="Changes" comment="Working On Multiprocessing Next">
+    <list default="true" id="59b03b88-0ed8-4f19-a929-7f40fd4030f1" name="Changes" comment="Going to Slim down everything to make more simple">
+      <change afterPath="$PROJECT_DIR$/Brain.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeHead.py" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeHead.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +114,7 @@
       <updated>1747765488307</updated>
       <workItem from="1747765489360" duration="13426000" />
       <workItem from="1747963317685" duration="5855000" />
-      <workItem from="1748013205836" duration="7501000" />
+      <workItem from="1748013205836" duration="11730000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -139,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747968609801</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Going to Slim down everything to make more simple">
+      <option name="closed" value="true" />
+      <created>1748026657859</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748026657859</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,10 +169,11 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Finished the snake class" />
     <MESSAGE value="Working On Multiprocessing Next" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working On Multiprocessing Next" />
+    <MESSAGE value="Going to Slim down everything to make more simple" />
+    <option name="LAST_COMMIT_MESSAGE" value="Going to Slim down everything to make more simple" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$SnakeHead.coverage" NAME="SnakeHead Coverage Results" MODIFIED="1747775819209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$main.coverage" NAME="main Coverage Results" MODIFIED="1748019978941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$main.coverage" NAME="main Coverage Results" MODIFIED="1748027755281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
