@@ -1,5 +1,6 @@
 import pygame
 import random
+import threading
 from SnakeHead import SnakeHead
 
 '''
@@ -39,16 +40,23 @@ running = True
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, 30)
 
-snakeHead = SnakeHead(windowSize/2,windowSize/2, gridCount, grWidth)
+snakes= []
+popSize = 4
+for i in range(popSize):
+    snakes.append(SnakeHead(windowSize/2,windowSize/2, gridCount, grWidth, i))
+
+
+
+
 
 #draw a bunch of lines instead of drawing a bunch of squares
 #where the lines intersect are possible coordinates
-def drawGrid(screen, gridCount, grWidth, grHeight):
-    #grWidth= width/ gridcount
-    #for gc -1: line @ grWidth*i
-    for i in range(1, gridCount):
-        pygame.draw.line(screen, "gray", (grWidth*i , 0 ), (grWidth*i , screen.get_width()), 1)
-        pygame.draw.line(screen, "gray", (0 , grHeight*i ), (screen.get_width() , grHeight*i), 1)
+# def drawGrid(screen, gridCount, grWidth, grHeight):
+#     #grWidth= width/ gridcount
+#     #for gc -1: line @ grWidth*i
+#     for i in range(1, gridCount):
+#         pygame.draw.line(screen, "gray", (grWidth*i , 0 ), (grWidth*i , screen.get_width()), 1)
+#         pygame.draw.line(screen, "gray", (0 , grHeight*i ), (screen.get_width() , grHeight*i), 1)
 
 
 while running:
@@ -59,14 +67,6 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
-            if event.key == pygame.K_UP :
-                snakeHead.setVel((0,-1))
-            if event.key == pygame.K_DOWN :
-                snakeHead.setVel((0,1))
-            if event.key == pygame.K_RIGHT  :
-                snakeHead.setVel((1,0))
-            if event.key == pygame.K_LEFT :
-                snakeHead.setVel((-1,0))
 
     #FPS
     fps = clock.get_fps()
@@ -74,21 +74,27 @@ while running:
     #UPDATE
     currentTime = pygame.time.get_ticks()
     if currentTime - lastTime > moveDelay:
+        popAlive = False
         #move snake
-        snake_alive = snakeHead.update(gridCount, grWidth , windowSize, screen)
+        for i in range(0, len(snakes) ) :
+            snake_alive = snakes[i].update(gridCount, grWidth , windowSize, screen)
+            if snake_alive :
+                popAlive = True
 
-        if not snake_alive:
-            print("game over")
-            running = False
+        if not popAlive:
+            running =  False
 
         lastTime = currentTime
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
 
-    # RENDER YOUR GAME HERE
-    drawGrid(screen, gridCount, grWidth, grHeight)
-    snakeHead.draw(screen, grWidth, grHeight)
+    # RENDER  GAME HERE
+
+
+    for i in range(0, len(snakes)):
+        snakes[i].draw(screen, grWidth, grHeight)
+
     fps_text = font.render(f"FPS: {int(fps)}", True, pygame.Color('white'))
     screen.blit(fps_text, (10, 10))
 
