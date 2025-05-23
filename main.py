@@ -36,6 +36,9 @@ clock = pygame.time.Clock()
 running = True
 
 
+clock = pygame.time.Clock()
+font = pygame.font.Font(None, 30)
+
 snakeHead = SnakeHead(windowSize/2,windowSize/2, gridCount, grWidth)
 
 #draw a bunch of lines instead of drawing a bunch of squares
@@ -56,20 +59,23 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP :
                 snakeHead.setVel((0,-1))
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN :
                 snakeHead.setVel((0,1))
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT  :
                 snakeHead.setVel((1,0))
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT :
                 snakeHead.setVel((-1,0))
+
+    #FPS
+    fps = clock.get_fps()
 
     #UPDATE
     currentTime = pygame.time.get_ticks()
     if currentTime - lastTime > moveDelay:
         #move snake
-        snake_alive = snakeHead.update(gridCount, grWidth , windowSize)
+        snake_alive = snakeHead.update(gridCount, grWidth , windowSize, screen)
 
         if not snake_alive:
             print("game over")
@@ -83,6 +89,8 @@ while running:
     # RENDER YOUR GAME HERE
     drawGrid(screen, gridCount, grWidth, grHeight)
     snakeHead.draw(screen, grWidth, grHeight)
+    fps_text = font.render(f"FPS: {int(fps)}", True, pygame.Color('white'))
+    screen.blit(fps_text, (10, 10))
 
     # flip() the display to put your work on screen
     pygame.display.flip()
