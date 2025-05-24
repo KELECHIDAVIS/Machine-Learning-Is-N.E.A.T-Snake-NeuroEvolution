@@ -1,7 +1,7 @@
 #main.py
 
 import pygame
-from utils import *
+from helper import *
 
 '''
 snake game:

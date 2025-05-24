@@ -1,5 +1,7 @@
 import random
-from utils import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount
+import pygame
+from helper import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight
+
 
 class Link:
     def __init__(self, x , y ):
@@ -50,7 +52,11 @@ class Snake:
             self.yVel = possible[random.randint(0, 1)]
 
     def draw(self , screen):
-        pass
+        pygame.draw.rect(screen, "green", (self.x*gridWidth, self.y*gridHeight, gridWidth, gridWidth))
+        pygame.draw.rect(screen, "red", (self.food.x*gridWidth, self.food.y*gridHeight, gridWidth, gridWidth))
+        bodyParts = self.getBodyParts()
+        for bodyPart in bodyParts:
+            pygame.draw.rect(screen, "brown", (bodyPart[0] * gridWidth, bodyPart[1]  * gridHeight, gridWidth, gridWidth))
 
     def update(self):
         self.decide_action()
