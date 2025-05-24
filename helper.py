@@ -12,7 +12,7 @@ gridHeight = SCREEN_HEIGHT / gridCount
 running = True
 MOVE_DELAY = 250
 last_time= pygame.time.get_ticks()
-
+pop_size = 20
 clock = pygame.time.Clock()
 def handle_quadrant(snake_list, state_queue, grid_count, grid_width, screen_width, screen_height):
     for snake in snake_list:

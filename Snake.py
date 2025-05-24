@@ -1,7 +1,7 @@
 import random
 import pygame
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight
-
+from Brain import Brain_Random
 
 class Link:
     def __init__(self, x , y ):
@@ -40,7 +40,7 @@ class Snake:
         self.score = 0
         self.alive = True
         self.id = id
-        self.brain = None # manual, random, or NEAT
+        self.brain =  Brain_Random()# manual, random, or NEAT
 
         # initialize vels: cant either move vertically or horizontally at once
         possible = [1, -1]  # vels can be one or neg 1
@@ -64,8 +64,11 @@ class Snake:
         self.check_collisions(prevX, prevY)
 
     # where the thinking occurs
+    #should make async
     def decide_action(self):
-        pass
+        xVel, yVel = self.brain.think()
+        self.xVel = xVel
+        self.yVel = yVel
 
     #move snake by incrementing snake
     def move(self):
