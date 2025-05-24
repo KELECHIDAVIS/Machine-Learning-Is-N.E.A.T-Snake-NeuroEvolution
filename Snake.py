@@ -1,7 +1,8 @@
 import random
 import pygame
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight
-from Brain import Brain_Random
+from Brain import Brain_Random, Brain_Manual
+
 
 class Link:
     def __init__(self, x , y ):
@@ -30,7 +31,7 @@ class Food:
                 currPart = currPart.link
 
 class Snake:
-    def __init__(self , x , y ):
+    def __init__(self , x , y , brain=None):
         self.x = x
         self.y = y
         self.xVel = 0
@@ -40,7 +41,7 @@ class Snake:
         self.score = 0
         self.alive = True
         self.id = id
-        self.brain =  Brain_Random()# manual, random, or NEAT
+        self.brain =  brain# manual, random, or NEAT
 
         # initialize vels: cant either move vertically or horizontally at once
         possible = [1, -1]  # vels can be one or neg 1

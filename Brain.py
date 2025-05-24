@@ -1,5 +1,4 @@
 import random
-import pygame
 class Brain_Random():
 
     #returns x and y velocities
@@ -14,14 +13,13 @@ class Brain_Random():
 
 
 class Brain_Manual():
-    def think(self):
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    return (0, -1)
-                if event.key == pygame.K_DOWN:
-                    return 0, 1
-                if event.key == pygame.K_RIGHT:
-                    return 1, 0
-                if event.key == pygame.K_LEFT:
-                    return -1, 0
+    def __init__(self):
+        self.next_move = (0,1 )
+
+    #only set if direction is orthog
+    def set_direction(self, direction):
+        if self.next_move[0]*direction[0] +self.next_move[1]*direction[1] == 0 :
+            self.next_move = direction
+
+    def think(self ):
+        return self.next_move

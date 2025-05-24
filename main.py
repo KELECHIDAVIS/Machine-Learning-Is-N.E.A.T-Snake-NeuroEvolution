@@ -29,7 +29,7 @@ if __name__ == '__main__':
     font = pygame.font.Font(None, 30)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     for i in range(pop_size):
-        snakes.append(Snake(gridCount/2 , gridCount/2))
+        snakes.append(Snake(gridCount/2 , gridCount/2, manual_brain))
     while running:
         running = handle_events()
 
