@@ -23,3 +23,8 @@ class Brain_Manual():
 
     def think(self ):
         return self.next_move
+
+
+class Brain_NEAT():
+    def __init__(self):
+        pass

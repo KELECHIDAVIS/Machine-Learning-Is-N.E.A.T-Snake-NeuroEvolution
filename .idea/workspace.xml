@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59b03b88-0ed8-4f19-a929-7f40fd4030f1" name="Changes" comment="Random Brain Works">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="59b03b88-0ed8-4f19-a929-7f40fd4030f1" name="Changes" comment="Manual Brain Works">
       <change beforePath="$PROJECT_DIR$/Brain.py" beforeDir="false" afterPath="$PROJECT_DIR$/Brain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake.py" beforeDir="false" afterPath="$PROJECT_DIR$/Snake.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +113,7 @@
       <workItem from="1747765489360" duration="13426000" />
       <workItem from="1747963317685" duration="5855000" />
       <workItem from="1748013205836" duration="12740000" />
-      <workItem from="1748050121625" duration="5020000" />
+      <workItem from="1748050121625" duration="5787000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -182,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748055015626</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Manual Brain Works">
+      <option name="closed" value="true" />
+      <created>1748055835206</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748055835206</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +212,8 @@
     <MESSAGE value="Continuing to refactor" />
     <MESSAGE value="Making refactoring progress" />
     <MESSAGE value="Random Brain Works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Random Brain Works" />
+    <MESSAGE value="Manual Brain Works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manual Brain Works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -222,6 +228,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$SnakeHead.coverage" NAME="SnakeHead Coverage Results" MODIFIED="1747775819209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$main.coverage" NAME="main Coverage Results" MODIFIED="1748055762195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$main.coverage" NAME="main Coverage Results" MODIFIED="1748055846046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
