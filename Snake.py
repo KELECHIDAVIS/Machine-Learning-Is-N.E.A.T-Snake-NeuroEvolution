@@ -1,7 +1,6 @@
 import random
 import pygame
-from helper import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight
-from Brain import Brain_Random, Brain_Manual
+from helper import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight, MAX_STEPS_WITHOUT_FOOD
 
 
 class Link:
@@ -31,7 +30,7 @@ class Food:
                 currPart = currPart.link
 
 class Snake:
-    def __init__(self , x , y , brain=None):
+    def __init__(self , x , y ,id ):
         self.x = x
         self.y = y
         self.xVel = 0
@@ -41,7 +40,7 @@ class Snake:
         self.score = 0
         self.alive = True
         self.id = id
-        self.brain =  brain# manual, random, or NEAT
+        self.steps_without_food = 0
 
         # initialize vels: cant either move vertically or horizontally at once
         possible = [1, -1]  # vels can be one or neg 1
@@ -59,20 +58,72 @@ class Snake:
         for bodyPart in bodyParts:
             pygame.draw.rect(screen, "brown", (bodyPart[0] * gridWidth, bodyPart[1]  * gridHeight, gridWidth, gridWidth))
 
-    def update(self):
-        self.decide_action()
+    def update(self , network, genome):
+        if self.steps_without_food > MAX_STEPS_WITHOUT_FOOD:
+            self.alive = False
+        self.decide_action(network)
         prevX , prevY = self.move()
-        self.check_collisions(prevX, prevY)
+
+        #add determined fitness value
+        genome.fitness+=self.check_collisions(prevX, prevY)
 
     # where the thinking occurs
-    #should make async
-    def decide_action(self):
-        xVel, yVel = self.brain.think()
-        self.xVel = xVel
-        self.yVel = yVel
+    #takes in a feedforward network and changes vel based on input
+    def decide_action(self, network):
+        if not self.alive:
+            return
+        #input: xVel, yVel, foodX, foodY, leftDistanceToObstacle, rightDistToOb, updist, down
+
+        left_ob_dist = self.x
+        right_ob_dist = self.x
+        up_ob_dist = self.y
+        down_ob_dist = self.y
+
+        #while not running into a obstacle, iterate tracker
+        parts = self.getBodyParts()
+
+        while (left_ob_dist, self.y) not in parts and left_ob_dist >0 :
+            left_ob_dist = left_ob_dist - 1
+
+        while (right_ob_dist, self.y) not in parts and right_ob_dist<SCREEN_WIDTH :
+            right_ob_dist = right_ob_dist + 1
+
+        while (self.x , up_ob_dist) not in parts and up_ob_dist >0 :
+            up_ob_dist = up_ob_dist - 1
+
+        while (self.x , down_ob_dist) not in parts and down_ob_dist<SCREEN_HEIGHT :
+            down_ob_dist = down_ob_dist + 1
+
+        #the food position relative to snake
+        food_x = self.food.x - self.x
+        food_y = self.food.y - self.y
+        #output: (left, right, up, down)
+        output = network.activate ((self.xVel, self.yVel, food_x,food_y, left_ob_dist, right_ob_dist, up_ob_dist, down_ob_dist))
+
+        #find the max index in output list then change vel based on that
+        max_index = 0
+        for index in range(len(output)):
+            if output[max_index ] < output[index]:
+                max_index = index
+
+        if max_index == 0 :
+            self.xVel = -1
+            self.yVel = 0
+        elif max_index == 1 :
+            self.xVel = 1
+            self.yVel = 0
+        elif max_index == 2 :
+            self.xVel = 0
+            self.yVel = -1
+        else:
+            self.xVel = 0
+            self.yVel = 1
+
 
     #move snake by incrementing snake
     def move(self):
+        if not self.alive:
+            return
         prevX = self.x
         prevY = self.y
         self.x += self.xVel
@@ -80,10 +131,16 @@ class Snake:
         return prevX, prevY
 
     #check if the snake move into wall, into itself, or with a food
+    #if ran into food return 10 fitness
+    #if ran into wall or body return -5
+    #if didn't crash into anything return .1
     def check_collisions(self, prevX, prevY):
+        if not self.alive:
+            return
+
         if self.x < 0 or self.x *gridWidth> SCREEN_WIDTH or self.y < 0 or self.y *gridWidth> SCREEN_HEIGHT:
             self.alive = False
-            return
+            return -5
 
         #check collision with itself
         currLink = self.link
@@ -98,7 +155,7 @@ class Snake:
             prevY = nextY
             if self.x == currLink.x and self.y == currLink.y:
                 self.alive = False
-                return
+                return -5
             currLink = currLink.link
 
         #check collision with food
@@ -107,6 +164,12 @@ class Snake:
             self.food = Food(self)  # new rand food
             # add new link
             self.addLink(SCREEN_WIDTH, SCREEN_HEIGHT)
+            self.steps_without_food = 0
+            return 10
+        else:
+            self.steps_without_food += 1
+
+        return -.5
 
 
     def addLink(self, screen_width, screen_height ):

@@ -1,20 +1,21 @@
 import pygame
 
-from Brain import Brain_Manual
-
 SCREEN_WIDTH= 800
 SCREEN_HEIGHT = 800
 FPS = 60
-snakes = []
+
 gridCount = 32
 gridWidth = SCREEN_WIDTH / gridCount
 gridHeight = SCREEN_HEIGHT / gridCount
-running = True
+
 MOVE_DELAY = 250
-last_time= pygame.time.get_ticks()
-pop_size = 50
+
 clock = pygame.time.Clock()
-manual_brain= Brain_Manual()
+
+MAX_GENERATIONS = 1000
+MAX_LIFETIME = 2000 #how much update each snake gets
+MAX_STEPS_WITHOUT_FOOD = 250
+
 def handle_quadrant(snake_list, state_queue, grid_count, grid_width, screen_width, screen_height):
     for snake in snake_list:
         state_queue.put(snake.update(grid_count, grid_width, screen_width, screen_height))
@@ -37,12 +38,5 @@ def handle_events():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 return False
-            if event.key == pygame.K_UP:
-                manual_brain.set_direction((0, -1))
-            if event.key == pygame.K_DOWN:
-                manual_brain.set_direction((0, 1))
-            if event.key == pygame.K_RIGHT:
-                manual_brain.set_direction((1,0))
-            if event.key == pygame.K_LEFT:
-                manual_brain.set_direction((-1, 0))
+
     return True
