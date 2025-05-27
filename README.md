@@ -1,1 +1,1 @@
-![FinalSnake-MadewithClipchamp-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/aec3a0af-ffde-4a92-9f66-43df7803450b)
+![FinalSnake - Made with Clipchamp](https://github.com/user-attachments/assets/5c226fed-3fb1-41e3-af09-56fcc9975e1b)
