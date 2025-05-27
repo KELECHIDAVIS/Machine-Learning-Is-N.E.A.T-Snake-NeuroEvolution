@@ -24,7 +24,7 @@ class Food:
 
             is_on_snake = False
             # Check if food is on the head
-            if self.x == snakeHead_x and self.y == snakeHead_y:
+            if self.x == snakeHead_x or self.y == snakeHead_y:
                 is_on_snake = True
             else:
                 # Check if food is on any body part

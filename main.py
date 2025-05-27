@@ -220,25 +220,25 @@ if __name__ == '__main__':
     config_path = os.path.join(local_dir, 'config-feedforward.txt')
 
     #TRAINING
-    run(config_path)
+    #run(config_path)
 
     # Option 2: Load a previously saved winner genome and run it
     # Determine the path to the saved winner
-    # checkpoint_dir = os.path.join(local_dir, "checkpoints")
-    # winner_path = os.path.join(checkpoint_dir, "neat-winner.pkl")
-    #
-    # if os.path.exists(winner_path):
-    #     with open(winner_path, 'rb') as f:
-    #         winner_genome = pickle.load(f)
-    #
-    #     # Load the configuration that was used for training
-    #     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-    #                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
-    #                          config_path)
-    #
-    #     print('\nLoaded best genome:\n{!s}'.format(winner_genome))
-    #     # Run the loaded winner with rendering
-    #     run_snake_game(winner_genome, config, True)
-    # else:
-    #     print(f"Error: Winner genome not found at {winner_path}. Please run training first.")
+    checkpoint_dir = os.path.join(local_dir, "checkpoints")
+    winner_path = os.path.join(checkpoint_dir, "neat-winner.pkl")
+
+    if os.path.exists(winner_path):
+        with open(winner_path, 'rb') as f:
+            winner_genome = pickle.load(f)
+
+        # Load the configuration that was used for training
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             config_path)
+
+        print('\nLoaded best genome:\n{!s}'.format(winner_genome))
+        # Run the loaded winner with rendering
+        run_snake_game(winner_genome, config, True)
+    else:
+        print(f"Error: Winner genome not found at {winner_path}. Please run training first.")
 
