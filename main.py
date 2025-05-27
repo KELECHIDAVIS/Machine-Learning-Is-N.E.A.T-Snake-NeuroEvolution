@@ -31,43 +31,45 @@ FOR MULTIPLE SNAKE AGENTS SHOULD DIVIDE POPULATION INTO QUADRANTS THEN OPEN UP M
 #
 def run_snake_game(genome, config, render=False):
     if render:
-
         pygame.init()
         font = pygame.font.Font(None, 30)
         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        pygame.display.set_caption("NEAT Snake")  # Give your window a title
 
-        snake= Snake(gridCount / 2, gridCount / 2 , genome.key)
-        #genome.fitness = 0
+        snake = Snake(gridCount // 2, gridCount // 2, genome.key)  # Use integer division
         network = neat.nn.FeedForwardNetwork.create(genome, config)
 
         running = True
-        last_time = pygame.time.get_ticks()
+        last_snake_update_time = pygame.time.get_ticks()
 
         while running:
+            # Event handling: Process events on every frame (at FPS rate)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
 
-            if not snake.alive:
-                running = False
-
+            # Game Logic Update: Only update snake movement based on MOVE_DELAY
             current_time = pygame.time.get_ticks()
-
-            # update snakes
-            if current_time - last_time > MOVE_DELAY:
-
+            if current_time - last_snake_update_time > MOVE_DELAY:
                 if snake.alive:
-                    snake.update(network, genome, modify= False)
+                    snake.update(network, genome, modify=False)
+                    last_snake_update_time = current_time  # Reset timer only after successful update
+                else:
+                    running = False  # Snake died, stop the game loop
 
-                    screen.fill("black")
-                    snake.draw(screen)
-                    pygame.display.update()
+            # Drawing: Always redraw the screen and update the display at FPS rate
+            screen.fill("black")
+            #drawGrid(screen)  # Draw grid every frame if you want it
+            snake.draw(screen)
 
-                last_time = current_time
+            # Display the score
+            score_text = font.render(f"Score: {snake.score}", True, (255, 255, 255))
+            screen.blit(score_text, (10, 10))
 
+            pygame.display.flip()  # Use flip() for full screen update, often more reliable
 
-
-
-
+            # Manage frame rate
             clock.tick(FPS)
-
         pygame.quit()
     else:
         snake = Snake(gridCount / 2, gridCount / 2, genome.key)
@@ -187,23 +189,29 @@ def run(config_path):
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
-    #run_snake_game(winner, config, True)
+
+    # --- Start of new code for network visualization ---
+    # Define node names for the inputs and outputs for better readability
+    node_names = {
+        -1: 'X_Vel',
+        -2: 'Y_Vel',
+        -3: 'Food_X_Rel',
+        -4: 'Food_Y_Rel',
+        -5: 'Obst_Left_Dist',
+        -6: 'Obst_Right_Dist',
+        -7: 'Obst_Up_Dist',
+        -8: 'Obst_Down_Dist',
+        0: 'Move_Left',
+        1: 'Move_Right',
+        2: 'Move_Up',
+        3: 'Move_Down'
+    }
 
 
-    # Show output of the most fit genome against training data.
-    # print('\nOutput:')
-    # winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+
+    run_snake_game(winner, config, True)  # Play the game with the winner
 
 
-    # node_names = {-1: 'A', -2: 'B', 0: 'A XOR B'}
-    #
-    # visualize.draw_net(config, winner, True, node_names=node_names)
-    # visualize.draw_net(config, winner, True, node_names=node_names, prune_unused=True)
-    # visualize.plot_stats(stats, ylog=False, view=True)
-    # visualize.plot_species(stats, view=True)
-
-    # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
-    # p.run(main, 10)
 if __name__ == '__main__':
     # Determine path to configuration file. This path manipulation is
     # here so that the script will run successfully regardless of the
@@ -212,25 +220,25 @@ if __name__ == '__main__':
     config_path = os.path.join(local_dir, 'config-feedforward.txt')
 
     #TRAINING
-    #run(config_path)
+    run(config_path)
 
     # Option 2: Load a previously saved winner genome and run it
     # Determine the path to the saved winner
-    checkpoint_dir = os.path.join(local_dir, "checkpoints")
-    winner_path = os.path.join(checkpoint_dir, "neat-winner.pkl")
-
-    if os.path.exists(winner_path):
-        with open(winner_path, 'rb') as f:
-            winner_genome = pickle.load(f)
-
-        # Load the configuration that was used for training
-        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                             config_path)
-
-        print('\nLoaded best genome:\n{!s}'.format(winner_genome))
-        # Run the loaded winner with rendering
-        run_snake_game(winner_genome, config, True)
-    else:
-        print(f"Error: Winner genome not found at {winner_path}. Please run training first.")
+    # checkpoint_dir = os.path.join(local_dir, "checkpoints")
+    # winner_path = os.path.join(checkpoint_dir, "neat-winner.pkl")
+    #
+    # if os.path.exists(winner_path):
+    #     with open(winner_path, 'rb') as f:
+    #         winner_genome = pickle.load(f)
+    #
+    #     # Load the configuration that was used for training
+    #     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+    #                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
+    #                          config_path)
+    #
+    #     print('\nLoaded best genome:\n{!s}'.format(winner_genome))
+    #     # Run the loaded winner with rendering
+    #     run_snake_game(winner_genome, config, True)
+    # else:
+    #     print(f"Error: Winner genome not found at {winner_path}. Please run training first.")
 

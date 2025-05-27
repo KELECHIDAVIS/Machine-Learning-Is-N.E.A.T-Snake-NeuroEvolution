@@ -4,12 +4,182 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59b03b88-0ed8-4f19-a929-7f40fd4030f1" name="Changes" comment="The Fitness Values Are Not Changing When Running in Parallel">
+    <list default="true" id="59b03b88-0ed8-4f19-a929-7f40fd4030f1" name="Changes" comment="Got Parallel running tinkering with rendering efficiency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake.py" beforeDir="false" afterPath="$PROJECT_DIR$/Snake.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1009" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1019" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1029" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1039" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1049" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1059" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1069" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1079" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1089" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-109" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1099" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1109" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1119" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1129" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1139" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1149" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1159" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1169" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1179" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1189" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-119" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1199" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1209" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1219" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1229" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1239" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1249" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1259" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1269" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1279" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1289" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-129" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1299" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1309" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1319" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1329" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1339" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1349" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1359" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1369" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1379" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1389" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-139" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1399" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1409" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1419" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1429" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1439" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1449" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1459" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1469" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1479" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1489" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-149" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1499" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1509" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1519" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1529" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1539" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1549" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1559" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1569" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1579" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1589" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-159" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1599" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1609" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1619" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1629" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1639" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1649" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1659" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-1669" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-169" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-179" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-189" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-19" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-199" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-209" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-219" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-229" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-239" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-249" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-259" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-269" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-279" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-289" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-299" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-309" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-319" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-329" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-339" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-349" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-359" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-369" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-379" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-389" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-399" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-409" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-419" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-429" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-439" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-449" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-459" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-469" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-479" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-489" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-499" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-509" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-519" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-529" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-539" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-549" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-559" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-569" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-579" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-589" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-599" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-609" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-619" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-629" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-639" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-649" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-659" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-669" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-679" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-689" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-69" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-699" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-709" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-719" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-729" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-739" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-749" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-759" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-769" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-779" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-789" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-79" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-799" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-809" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-819" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-829" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-839" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-849" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-859" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-869" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-879" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-889" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-89" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-899" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-909" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-919" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-929" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-939" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-949" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-959" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-969" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-979" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-989" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-99" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-checkpoint-999" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-winner" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/neat-winner.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config-feedforward.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config-feedforward.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,22 +217,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.SnakeHead.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Kelechi/PycharmProjects/ML_Is_NEAT_Snake",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.SnakeHead.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kelechi/PycharmProjects/ML_Is_NEAT_Snake&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Kelechi\PycharmProjects\ML_Is_NEAT_Snake" />
@@ -122,7 +292,8 @@
       <workItem from="1748013205836" duration="12740000" />
       <workItem from="1748050121625" duration="5932000" />
       <workItem from="1748318182435" duration="6897000" />
-      <workItem from="1748360819111" duration="7971000" />
+      <workItem from="1748360819111" duration="8399000" />
+      <workItem from="1748369284387" duration="4267000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -212,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748324496234</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Got Parallel running tinkering with rendering efficiency">
+      <option name="closed" value="true" />
+      <created>1748369076502</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748369076502</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,29 +419,15 @@
     <MESSAGE value="Manual Brain Works" />
     <MESSAGE value="Working on NEAT Implementation" />
     <MESSAGE value="The Fitness Values Are Not Changing When Running in Parallel" />
-    <option name="LAST_COMMIT_MESSAGE" value="The Fitness Values Are Not Changing When Running in Parallel" />
+    <MESSAGE value="Got Parallel running tinkering with rendering efficiency" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got Parallel running tinkering with rendering efficiency" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>48</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>56</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Snake.py</url>
-          <line>70</line>
+          <line>86</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
@@ -270,6 +435,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$SnakeHead.coverage" NAME="SnakeHead Coverage Results" MODIFIED="1747775819209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$main.coverage" NAME="main Coverage Results" MODIFIED="1748368843214" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ML_Is_NEAT_Snake$main.coverage" NAME="main Coverage Results" MODIFIED="1748373526718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

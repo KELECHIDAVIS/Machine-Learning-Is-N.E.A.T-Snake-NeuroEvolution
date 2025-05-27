@@ -119,8 +119,8 @@ def draw_net(config, genome, view=False, filename=None, node_names=None, show_di
         return
 
     # If requested, use a copy of the genome which omits all components that won't affect the output.
-    if prune_unused:
-        genome = genome.get_pruned_copy(config.genome_config)
+    # if prune_unused:
+    #     genome = genome.get_pruned_copy(config.genome_config)
 
     if node_names is None:
         node_names = {}

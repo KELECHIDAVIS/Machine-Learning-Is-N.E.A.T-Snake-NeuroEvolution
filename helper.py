@@ -2,7 +2,7 @@ import pygame
 
 SCREEN_WIDTH= 800
 SCREEN_HEIGHT = 800
-FPS = 120
+FPS = 60
 
 gridCount = 24
 gridWidth = SCREEN_WIDTH / gridCount
@@ -12,12 +12,12 @@ MOVE_DELAY = 250
 
 clock = pygame.time.Clock()
 
-MAX_GENERATIONS = 2048
-MAX_LIFETIME = 2048 #how much update each snake gets
-MAX_STEPS_WITHOUT_FOOD = 200
-DEATH_SCORE= -10
-EAT_SCORE = 20
-LIVING_SCORE = -.1
+MAX_GENERATIONS = 2400
+MAX_LIFETIME = 9000 #how much update each snake gets
+MAX_STEPS_WITHOUT_FOOD = 160
+DEATH_SCORE= -5
+EAT_SCORE = 10
+LIVING_SCORE = -.05
 def handle_quadrant(snake_list, state_queue, grid_count, grid_width, screen_width, screen_height):
     for snake in snake_list:
         state_queue.put(snake.update(grid_count, grid_width, screen_width, screen_height))
