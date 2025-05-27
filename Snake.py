@@ -1,6 +1,7 @@
+#snake.py
 import random
 import pygame
-from helper import SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight, MAX_STEPS_WITHOUT_FOOD
+from helper import DEATH_SCORE , LIVING_SCORE, EAT_SCORE, SCREEN_WIDTH, SCREEN_HEIGHT, gridWidth, gridCount, gridHeight, MAX_STEPS_WITHOUT_FOOD
 
 
 class Link:
@@ -58,14 +59,19 @@ class Snake:
         for bodyPart in bodyParts:
             pygame.draw.rect(screen, "brown", (bodyPart[0] * gridWidth, bodyPart[1]  * gridHeight, gridWidth, gridWidth))
 
-    def update(self , network, genome):
-        if self.steps_without_food > MAX_STEPS_WITHOUT_FOOD:
-            self.alive = False
+    def update(self , network, genome, modify=True):
         self.decide_action(network)
         prevX , prevY = self.move()
 
         #add determined fitness value
-        genome.fitness+=self.check_collisions(prevX, prevY)
+        fitness= self.check_collisions(prevX, prevY)
+        if type(genome) == tuple and modify:
+            genome[1].fitness+=fitness
+        elif modify:
+            genome.fitness+=fitness
+
+        print(self.getState())
+
 
     # where the thinking occurs
     #takes in a feedforward network and changes vel based on input
@@ -133,14 +139,14 @@ class Snake:
     #check if the snake move into wall, into itself, or with a food
     #if ran into food return 10 fitness
     #if ran into wall or body return -5
-    #if didn't crash into anything return .1
+    #if didn't crash into anything return -.1
     def check_collisions(self, prevX, prevY):
         if not self.alive:
-            return
+            return DEATH_SCORE
 
         if self.x < 0 or self.x *gridWidth> SCREEN_WIDTH or self.y < 0 or self.y *gridWidth> SCREEN_HEIGHT:
             self.alive = False
-            return -5
+            return DEATH_SCORE
 
         #check collision with itself
         currLink = self.link
@@ -155,7 +161,7 @@ class Snake:
             prevY = nextY
             if self.x == currLink.x and self.y == currLink.y:
                 self.alive = False
-                return -5
+                return DEATH_SCORE
             currLink = currLink.link
 
         #check collision with food
@@ -165,11 +171,14 @@ class Snake:
             # add new link
             self.addLink(SCREEN_WIDTH, SCREEN_HEIGHT)
             self.steps_without_food = 0
-            return 10
+            return EAT_SCORE
         else:
             self.steps_without_food += 1
+            if self.steps_without_food > MAX_STEPS_WITHOUT_FOOD:
+                self.alive = False
+                return DEATH_SCORE
 
-        return -.5
+        return LIVING_SCORE
 
 
     def addLink(self, screen_width, screen_height ):

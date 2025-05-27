@@ -4,7 +4,9 @@ import os
 from Snake import Snake
 from helper import *
 import neat
+import visualize
 from multiprocessing import Pool
+import pickle
 '''
 snake game:
 each frame (lock framerate) ,
@@ -34,17 +36,17 @@ def run_snake_game(genome, config, render=False):
         font = pygame.font.Font(None, 30)
         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-        snake= Snake(SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 , genome.key)
-        genome.fitness = 0
+        snake= Snake(gridCount / 2, gridCount / 2 , genome.key)
+        #genome.fitness = 0
         network = neat.nn.FeedForwardNetwork.create(genome, config)
 
         running = True
         last_time = pygame.time.get_ticks()
-        life_time = 0
-        while running and life_time < MAX_LIFETIME:
+
+        while running:
 
             if not snake.alive:
-                break
+                running = False
 
             current_time = pygame.time.get_ticks()
 
@@ -52,49 +54,39 @@ def run_snake_game(genome, config, render=False):
             if current_time - last_time > MOVE_DELAY:
 
                 if snake.alive:
-                    snake.update(network, genome)
+                    snake.update(network, genome, modify= False)
 
+                    screen.fill("black")
+                    snake.draw(screen)
+                    pygame.display.update()
 
                 last_time = current_time
-                life_time = life_time + 1
 
-            screen.fill("black")
 
-            if snake.alive:
-                snake.draw(screen)
 
-            fps = clock.get_fps()
-            fps_text = font.render(f"FPS: {int(fps)}", True, pygame.Color('yellow'))
-            screen.blit(fps_text, (10, 10))
-            drawGrid(screen)
-            pygame.display.update()
+
+
             clock.tick(FPS)
 
         pygame.quit()
     else:
-        snake = Snake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, genome.key)
+        snake = Snake(gridCount / 2, gridCount / 2, genome.key)
         genome.fitness = 0
         network = neat.nn.FeedForwardNetwork.create(genome, config)
 
         running = True
-        last_time = pygame.time.get_ticks()
+
         life_time = 0
         while running and life_time < MAX_LIFETIME:
 
             if not snake.alive:
                 break
 
-            current_time = pygame.time.get_ticks()
+            # update snake
+            #move delay only for aesthetics
+            snake.update(network, genome)
+            life_time+=1
 
-            # update snakes
-            if current_time - last_time > MOVE_DELAY:
-
-                if snake.alive:
-                    snake.update(network, genome)
-
-                last_time = current_time
-                life_time = life_time + 1
-            clock.tick(FPS)
         return genome.fitness
 
 
@@ -170,13 +162,33 @@ def run(config_path):
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
+
+    checkpoint_dir =os.path.join( os.path.dirname(__file__), "checkpoints")
+    os.makedirs(checkpoint_dir, exist_ok=True)  # Creates directory if it doesn't exist
+
+    checkpointer = neat.Checkpointer(
+        generation_interval=10,  # Save every 10 generations
+        time_interval_seconds=None,  # Disable time-based saving
+        filename_prefix=os.path.join(checkpoint_dir, "neat-checkpoint-")
+    )
+    p.add_reporter(checkpointer)
 
     pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
     winner = p.run(pe.evaluate, MAX_GENERATIONS)
 
+    del pe  # join all processes
+
+    # Save the winner genome explicitly
+    winner_path = os.path.join(checkpoint_dir, "neat-winner.pkl")
+    with open(winner_path, 'wb') as f:
+        pickle.dump(winner, f)
+    print(f"Winner genome saved to {winner_path}")
+
+
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
+    #run_snake_game(winner, config, True)
+
 
     # Show output of the most fit genome against training data.
     # print('\nOutput:')
@@ -198,4 +210,27 @@ if __name__ == '__main__':
     # current working directory.
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config-feedforward.txt')
-    run(config_path)
+
+    #TRAINING
+    #run(config_path)
+
+    # Option 2: Load a previously saved winner genome and run it
+    # Determine the path to the saved winner
+    checkpoint_dir = os.path.join(local_dir, "checkpoints")
+    winner_path = os.path.join(checkpoint_dir, "neat-winner.pkl")
+
+    if os.path.exists(winner_path):
+        with open(winner_path, 'rb') as f:
+            winner_genome = pickle.load(f)
+
+        # Load the configuration that was used for training
+        config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                             neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                             config_path)
+
+        print('\nLoaded best genome:\n{!s}'.format(winner_genome))
+        # Run the loaded winner with rendering
+        run_snake_game(winner_genome, config, True)
+    else:
+        print(f"Error: Winner genome not found at {winner_path}. Please run training first.")
+
